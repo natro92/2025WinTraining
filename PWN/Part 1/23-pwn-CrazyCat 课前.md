@@ -8,7 +8,7 @@
 
 第二部分在gift里
 
-![] (https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250116170023.png)
+![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250116170023.png)
 
 flag： nssctf{Nc_@nd_g3t5h31L}
 
