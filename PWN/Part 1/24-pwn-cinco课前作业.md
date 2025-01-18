@@ -24,7 +24,7 @@ cd至nothing，ls显示，cat查看文件内容
 
 ![屏幕截图 2025-01-17 111939](https://github.com/user-attachments/assets/393fa9fc-3af4-4503-a530-344b48aab24e)
 
-发现cat、flag被strstr函数禁用，s、h也因strpbrk禁止出现所以ls也没法使用
+发现cat、flag被strstr函数禁用，s、h也因strpbrk禁止出现所以ls也没法使用\
 继续观察函数发现条件语句不成立，则关闭标准输出执行backdoor函数，在backdoor函数中发现system函数
 
 ![屏幕截图 2025-01-17 170937](https://github.com/user-attachments/assets/3aa93e89-9041-4088-b5b1-01958319a91f)
@@ -34,6 +34,6 @@ cd至nothing，ls显示，cat查看文件内容
 ![屏幕截图 2025-01-18 174451](https://github.com/user-attachments/assets/0d3bb12b-2068-4835-b5b6-6072c32ed772)
 
 **tac为cat的反写，不会被禁用，功能为按行倒序查看文件内容**\
-**fla * 是通配符模式，可以模糊搜索文件，表示所有以fla开头的文件，避免了flag被禁用**
+**fla * 是通配符模式，可以模糊搜索文件，表示所有以fla开头的文件，避免了flag被禁用**\
 **>&2 表示将标准输出重定向到标准错误输出，即使有错误也可以直接输出到终端，便于观察（对重定向错误输出的理解不知道对不对）**\
 通过此绕过处理，成功得到flag
