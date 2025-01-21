@@ -1,0 +1,37 @@
+//该代码是java2.java，不过私自对程序添加了打印功能
+//注意：Java的命名规范,以public声明的类必须用完全一致的源文件名称，比如此处修改文件名为ChainMethodExample.java
+class Person {//定义了一个名为Person的类
+    private String name;
+    private int age;//声明了两个私有数据
+    public Person() {
+    }//定义了一个无参数构造的析构函数
+    public Person setName(String name) {
+        this.name = name;
+        return this;
+    }//公有函数：用于设置name属性的值
+
+    public Person setAge(int age) {
+        this.age = age;
+        return this;
+    }//公有函数：用于设置age的值
+
+    //添加获取name的方法
+    public String getName(){
+        return name;
+    }
+
+    //添加获取age的方法
+    public int getAge(){
+        return age;
+    }
+}
+public class ChainMethodExample {//定义了一个名为ChainMethodExample的公共类
+    public static void main(String[] args) {//定义主函数main
+        Person person = new Person()//创建了一个名为person的对象
+              .setName("Alice")
+              .setAge(25);//根据对象进行设置
+            //进行
+            System.out.println("Name:"+person.getName());
+            System.out.println("Age:"+person.getAge());
+    }
+}//注意：Java的命名规范,以public声明的类必须用完全一致的源文件名称，比如此处修改文件名为ChainMethodExample.java

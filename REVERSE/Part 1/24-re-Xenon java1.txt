@@ -1,0 +1,24 @@
+import java.util.Scanner;//导入了Scanner类，用于从中读取数据
+public class java1 {//定义了一个公共类，注意：该类名称必须与文件名相同（大小写敏感）
+    public static void main(String[] args) {//程序的主函数main
+        Scanner sc=new Scanner(System.in);//创建了一个Scanner对象sc,从标准输入中读取数据
+        int max=0;
+        int i=0;//定义了两个变量，分别初始化为0
+        while(sc.hasNext()){//while循环:只要输入还有下一个整数，就重新进入循环
+            int cmp=sc.nextInt();//读入下一个整数，放入变量cmp中
+            if(i==0){
+                max=cmp;
+                i++;
+            }//如果是第一次读取，就把cmp的值赋给max
+            if(cmp>max){
+                max=cmp;
+            }//如果新读取的数更大，就进行替换
+            if(cmp==0){
+                i=0;
+                System.out.println(max);//如果读取的数为0，就输出当前最大值，并将i重置为0
+                continue;//继续下一次循环
+            }
+        }
+    }
+}//最终该代码实现 记录数据最大值的功能
+/*当不遇到0时，不断比较替换最大值，直到读取的数为0时，输出最大值并重新记录*/

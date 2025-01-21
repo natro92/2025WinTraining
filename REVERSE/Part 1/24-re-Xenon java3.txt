@@ -1,0 +1,61 @@
+//注意：Java的命名规范,以public声明的类必须用完全一致的源文件名称，比如此处修改文件名为Fish.java
+abstract class Animal{//首先定义抽象类Animal
+    protected int legs;//定义受保护的整型变量
+    protected Animal(int legs){
+        this.legs=legs;
+    }//初始化，对legs进行赋值
+    abstract void eat();//抽象的方法，会在继承的子类中实现
+    public void walk(){
+        System.out.println(legs+"条腿走路");
+    }
+}
+interface Pet{//接口
+    String getName();//声明一个函数
+    void setName(String name);
+    void play();//声明两个公有函数
+}
+
+class Fish extends Animal implements Pet {//继承类Fish
+    private String name;//声明私有变量
+
+    public Fish() {
+        super(0);
+    }//调用父类Animal的构造函数
+
+    public void walk() {
+        System.out.println("无腿，不能走路");
+    }//重写父类Animal的walk方法
+
+    @Override
+    void eat() {
+        System.out.println("通过嘴巴吞咽食物");
+    }//进行重写
+
+    @Override
+    public String getName() {
+        return name;
+    }//具体实现pet接口的getName方法
+
+    @Override
+    public void setName(String name) {
+        if (name == null || name.isEmpty()) {
+            System.out.println("名字不合法");
+            return;
+        }
+        this.name = name;
+    }//具体实现pet接口的setName方法，检查名字是否为空
+
+    @Override
+    public void play() {
+        System.out.println("在水中游动玩耍");
+    }//实现play方法
+
+    public static void main(String[] args) {//这是程序的入口
+        Fish fish = new Fish();//创建一个Fish类的对象
+        fish.setName("peach");
+        System.out.println("Name:"+fish.getName());
+        fish.eat();
+        fish.play();
+        fish.walk();//再依次调用相应函数
+    }
+}
