@@ -1,10 +1,3 @@
----
-title: 湘岚杯
-date: 2025-01-22 09:47:54
-tags:
-categories:
-- PWN
----
 CrazyCat-pwn
 
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121140940.png)
@@ -198,7 +191,7 @@ flag:
 
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121165930.png)
 
-首先按照0x的格式输入要修改的地址。
+首先按照`0x`的格式输入要修改的地址。
 
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170028.png)
 
@@ -206,7 +199,7 @@ flag:
 
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170126.png)
 
-例如这里我们选择的是0x40151f，并将此处修改为0x00。
+例如这里我们选择的是`0x40151f`，并将此处修改为`0x00`。
 
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170219.png)
 
@@ -214,13 +207,13 @@ flag:
 
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170606.png)
 
-在这里可以看到用syscall调用了系统调用号为3c的程序，将3c修改就可以调用其他程序。将其修改为0就可以调用read函数。
+在这里可以看到用`syscall`调用了系统调用号为`3c`的程序，将`3c`修改就可以调用其他程序。将其修改为`0`就可以调用`read`函数。
 
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170908.png)
 
-可以看到成功调用了read函数，且拥有栈溢出漏洞。
-ROPgadget查询后发现只有pop rbp可用，但程序中有一个key函数可以将rbp的内容放入rdi中。
-之后便是简单的ret2libc。
+可以看到成功调用了`read`函数，且拥有栈溢出漏洞。
+ROPgadget查询后发现只有`pop rbp`可用，但程序中有一个`key`函数可以将`rbp`的内容放入`rdi`中。
+之后便是简单的`ret2libc`。
 exp：
 ```python
 from pwn import *
