@@ -6,13 +6,19 @@ categories:
 - PWN
 ---
 CrazyCat-pwn
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121140940.png)
+
 ~~做了两题就去春秋杯了，结果春秋杯爆零，还不如把这个做完QAQ。~~
 # ezlibc
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121141259.png)
+
 一道简单的`ret2libc`的题目，开启`canary`，得先想办法泄漏`canary`。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121141418.png)
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121141711.png)
+
 虽然有`printf`函数，但不能直接泄漏地址，但`printf`会一直输出直到`\x00`，那么把`canary`前填充满`deadbeef`就能泄漏`canary`。
 泄漏`canary`后在构造ROP泄漏地址，获取`libc`基址并重新调用`read`函数进行第三次溢出来获取`shell`。
 exp:
@@ -66,6 +72,7 @@ p.sendafter(b'closer to the key', b'a')
 p.interactive()
 ```
 shell:
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121160630.png)
 # ret2text
 简单的`ret2text`类型题目
@@ -90,15 +97,21 @@ p.send(payload)
 p.interactive()
 ```
 shell:
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121161101.png)
 
 # sandbox
 一道简单的`orw`类型题目。
 `seccomp`后可以看到只禁用了`execve`。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121161542.png)
+
 可以构造最普通的`orw`。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121161640.png)
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121161654.png)
+
 可以看见开启了`canary`，有栈溢出和格式化字符串漏洞，那么先用格式化字符串漏洞泄漏`canary`和`libc`的基址，然后构造`ROP`类型的`orw`即可泄漏`./flag`的数据。
 exp:
 ```python
@@ -177,21 +190,34 @@ p.send(b'./flag\x00')
 p.interactive()
 ```
 flag:
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121163812.png)
 
 # 宇宙射线
 程序里给了`/proc/self/mem`，可以直接修改代码。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121165930.png)
+
 首先按照0x的格式输入要修改的地址。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170028.png)
+
 然后在此处输入一个字节，便可以修改为输入的字节。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170126.png)
+
 例如这里我们选择的是0x40151f，并将此处修改为0x00。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170219.png)
+
 可以看到修改成功。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170606.png)
+
 在这里可以看到用syscall调用了系统调用号为3c的程序，将3c修改就可以调用其他程序。将其修改为0就可以调用read函数。
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250121170908.png)
+
 可以看到成功调用了read函数，且拥有栈溢出漏洞。
 ROPgadget查询后发现只有pop rbp可用，但程序中有一个key函数可以将rbp的内容放入rdi中。
 之后便是简单的ret2libc。
@@ -248,4 +274,5 @@ p.send(payload)
 p.interactive()
 ```
 shell:
+
 ![](https://raw.githubusercontent.com/LH864042219/PWN-Obsidian/refs/heads/main/picture/Pasted%20image%2020250122094222.png)
